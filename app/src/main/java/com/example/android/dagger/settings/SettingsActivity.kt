@@ -33,20 +33,15 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        super.onCreate(savedInstanceState)
-        // Gets the userManager from the application graph to obtain the instance
-        // of UserComponent and gets this Activity injected
-
-        // 2) Grab userManager from appComponent to check if the user is logged in or not
+        // Gets the userManager from the application graph to obtain the UserComponent
+        // and gets this Activity injected
         val userManager = (application as MyApplication).appComponent.userManager()
-        if (!userManager.isUserLoggedIn()) {  }
-        else {
-            setContentView(R.layout.activity_main)
-            // 3) If the MainActivity needs to be displayed, we get the UserComponent
-            // from the application graph and gets this Activity injected
-            userManager.userComponent!!.inject(this)
-            setupViews()
-        }
+        userManager.userComponent!!.inject(this)
+
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_settings)
+
+        setupViews()
 
     }
 
