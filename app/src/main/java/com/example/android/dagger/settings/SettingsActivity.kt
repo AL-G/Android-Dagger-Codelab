@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 class SettingsActivity : AppCompatActivity() {
 
-    // 1) SettingsViewModel is provided by Dagger
+    // SettingsViewModel is provided by Dagger
     @Inject
     lateinit var settingsViewModel: SettingsViewModel
 

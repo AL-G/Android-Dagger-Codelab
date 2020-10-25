@@ -23,10 +23,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
-import com.example.android.dagger.login.LoginActivity
-import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.settings.SettingsActivity
-import com.example.android.dagger.user.UserManager
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -41,26 +38,16 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // 2) Grab userManager from appComponent to check if the user is logged in or not
+        // Grab userManager from appComponent to check if the user is logged in or not
         val userManager = (application as MyApplication).appComponent.userManager()
 
         super.onCreate(savedInstanceState)
 
-        if (!userManager.isUserLoggedIn()) {
-            if (!userManager.isUserRegistered()) {
-                startActivity(Intent(this, RegistrationActivity::class.java))
-                finish()
-            } else {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }
-        } else {
-            setContentView(R.layout.activity_main)
-            // 3) If the MainActivity needs to be displayed, we get the UserComponent
-            // from the application graph and gets this Activity injected
-            userManager.userComponent!!.inject(this)
-            setupViews()
-        }
+        setContentView(R.layout.activity_main)
+        // If the MainActivity needs to be displayed, we get the UserComponent
+        // from the application graph and gets this Activity injected
+        userManager.userComponent!!.inject(this)
+        setupViews()
 
     }
 

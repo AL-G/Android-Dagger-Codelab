@@ -26,12 +26,9 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.registration.RegistrationActivity
 import com.example.android.dagger.registration.RegistrationViewModel
-import dagger.internal.InjectedFieldSignature
 import javax.inject.Inject
 
 class EnterDetailsFragment : Fragment() {
@@ -56,9 +53,7 @@ class EnterDetailsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        //(requireActivity().application as MyApplication).appComponent.inject(this)
         (activity as RegistrationActivity).registrationComponent.inject(this)
-
     }
 
     override fun onCreateView(
@@ -69,7 +64,7 @@ class EnterDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_enter_details, container, false)
 
         enterDetailsViewModel.enterDetailsState.observe(this,
-            Observer<EnterDetailsViewState> { state ->
+            { state: EnterDetailsViewState ->
                 when (state) {
                     is EnterDetailsSuccess -> {
 

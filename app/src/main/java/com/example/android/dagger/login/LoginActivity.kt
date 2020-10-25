@@ -17,30 +17,29 @@
 package com.example.android.dagger.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.Observer
-import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
+import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    // 1) LoginViewModel is provided by Dagger
+    // LoginViewModel is provided by Dagger
     @Inject
     lateinit var loginViewModel: LoginViewModel
     private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        // 2) Creates an instance of Login component by grabbing the factory from the app graph
+        // Creates an instance of Login component by grabbing the factory from the app graph
         // and injects this activity to that Component
         (application as MyApplication).appComponent.loginComponent().create().inject(this)
 
@@ -48,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // Listens for the loginState LiveData
-        loginViewModel.loginState.observe(this, Observer<LoginViewState> { state ->
+        loginViewModel.loginState.observe(this, { state ->
             when (state) {
                 is LoginSuccess -> {
                     startActivity(Intent(this, MainActivity::class.java))
