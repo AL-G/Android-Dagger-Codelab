@@ -19,4 +19,4 @@ The project follows a typical MVVM pattern where all the complexity of the View 
 
 <h3>Application Graph (before adding splash screen)</h3>
 
-<img src="https://github.com/AL-G/Android-Dagger-Codelab/blob/main/app/src/main/res/drawable/dependencyGraph.png"/>
+<img src="https://github.com/AL-G/Android-Dagger-Codelab/blob/main/app/src/main/res/drawable/applicationGraph.png"/>
